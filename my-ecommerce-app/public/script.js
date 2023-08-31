@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async event => {
       const productId = event.target.getAttribute('data-product-id');
       const response = await addToCart(productId);
-      updateCartUI(response.cart);
+      
+  updateCartUI(response.cart);
+  updateOrderTotal(response.cartTotal);
+
     });
   });
 
@@ -15,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   checkoutButton.addEventListener('click', async () => {
     const response = await checkout();
     // Update UI after checkout response
-    updateCartUI(response.cart);
+    
+  updateCartUI(response.cart);
+  updateOrderTotal(response.cartTotal);
+
     updateOrderTotal(response.orderTotal); // Update the displayed order total
   });
 

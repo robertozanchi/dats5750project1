@@ -15,10 +15,17 @@ app.post('/api/add-to-cart', (req, res) => {
     price: getProductPrice(productId)
   };
   cart.push(product);
-  res.json({ message: 'Product added to cart', cart });
+  
+  const cartTotal = calculateCartTotal();
+  res.json({ message: 'Product added to cart', cart, cartTotal });
+
 });
 
 // Calculate the price based on productId
+function calculateCartTotal() {
+  return cart.reduce((total, product) => total + product.price, 0);
+}
+
 function getProductPrice(productId) {
   if (productId === '1') {
     return 150; // Product 1 price
